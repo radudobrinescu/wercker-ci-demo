@@ -45,9 +45,9 @@ push-release:
        #tag: ${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
        repository: fra.ocir.io/ptsbm02/devops
        registry: https://fra.ocir.io/v2
-       working-dir: /pipeline/source
-       ports: "5000"
-       cmd: 'python app.py'
+       #working-dir: /pipeline/source
+       #ports: "5000"
+       #cmd: 'python app.py'
        #cmd: 'sleep infinity'
        
 inject-secret:
