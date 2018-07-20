@@ -1,0 +1,88 @@
+box:
+  #id: python:2.7-slim
+  #id: cbankieratypon/python-2.7-flask
+  #id: jazzdd/alpine-flask:latest
+  id: 
+  ports:
+    - "5000"
+
+dev:
+  steps:
+    - pip-install
+    - internal/watch:
+        code: python app.py
+        reload: true
+        
+# Build definition
+build:
+  # The steps that will be executed on build
+  steps:
+    # A step that executes `pip install` command
+    - pip-install
+    # A custom script step, name value is used in the UI
+    # and the code value contains the command that get executed
+    - script:
+        name: python unit test
+        code: |
+          python app_test.py
+          echo "python version $(python --version) running"
+          echo "pip version $(pip --version) running" 
+#Build docker container
+docker-build:
+  steps:
+    - internal/docker-build:
+      dockerfile: Dockerfile 
+      image-name: myimageapp
+ 
+#Push release definition
+push-release:
+  steps:
+    - internal/docker-push:
+       #image-name: myimageapp
+       username: $OCIRUSERNAME
+       password: $OCIRPASSWORD
+       tag: ${WERCKER_GIT_COMMIT}
+       #tag: ${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
+       repository: fra.ocir.io/ptsbm02/getting-started-python
+       registry: https://fra.ocir.io/v2
+       working-dir: /pipeline/source
+       ports: "5000"
+       cmd: 'python app.py'
+       #cmd: 'sleep infinity'
+       
+inject-secret:
+    box:
+        id: alpine
+        cmd: /bin/sh
+    steps:    
+    - kubectl:
+        name: delete secret
+        server: $KUBERNETES_MASTER
+        token: $KUBERNETES_TOKEN
+        insecure-skip-tls-verify: true
+        command: delete secret ptsbm02; echo delete registry secret
+    - kubectl:
+        name: create secret
+        server: $KUBERNETES_MASTER
+        token: $KUBERNETES_TOKEN
+        insecure-skip-tls-verify: true
+        command: create secret docker-registry ptsbm02 --docker-server=$DOCKER_REGISTRY --docker-username=$OCIRUSERNAME --docker-password=$SECRET_TOKEN --docker-email=$DOCKER_EMAIL; echo create registry secret       
+deploy-to-cluster:
+    box:
+        id: alpine
+        cmd: /bin/sh
+    steps:
+
+    - bash-template
+
+    - script:
+        name: "Visualise Kubernetes config"
+        code: cat kubernetes.yml
+           
+    - kubectl:
+        name: deploy to stage
+        server: $KUBERNETES_MASTER
+        #username: $KUBERNETES_USERNAME
+        token: $KUBERNETES_TOKEN
+        insecure-skip-tls-verify: true
+        command: apply -f kubernetes.yml --namespace=stage
