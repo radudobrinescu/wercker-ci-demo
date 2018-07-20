@@ -67,6 +67,7 @@ inject-secret:
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
         command: create secret docker-registry ptsbm02 --docker-server=$DOCKER_REGISTRY --docker-username=$OCIRUSERNAME --docker-password=$SECRET_TOKEN --docker-email=$DOCKER_EMAIL; echo create registry secret       
+
 deploy-to-stage:
     box:
         id: alpine
@@ -86,7 +87,8 @@ deploy-to-stage:
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
         command: apply -f kubernetes.yml --namespace=stage
- ua-test:
+ 
+ get-public-ip:
     steps:
      -script:
         name: "Get Frontend Public IP"
