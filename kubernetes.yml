@@ -23,12 +23,12 @@ spec:
           containerPort: 5000
           protocol: TCP
           #command: ['sh','-c','pyton app.py; sleep infinity']
-        imagePullSecrets:
-         - name: ptsbm02
         readinessProbe:
           httpGet:
             path: /
-            port: 8080
+            port: 5000
+       imagePullSecrets:
+         - name: ptsbm02
 strategy:
    type: RollingUpdate
    rollingUp      maxSurge: 50%
@@ -46,4 +46,4 @@ spec:
     name: sample-app-backend-svc
   selector:
     app: sample-app
- # type: LoadBalancer
+  type: LoadBalancer
