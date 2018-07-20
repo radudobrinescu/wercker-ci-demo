@@ -32,7 +32,7 @@ docker-build:
   steps:
     - internal/docker-build:
       dockerfile: Dockerfile 
-      image-name: sample-app
+      image-name: sample-app:${WERCKER_GIT_COMMIT}
  
 #Push release definition
 push-release:
