@@ -43,7 +43,7 @@ push-release:
        password: $OCIRPASSWORD
        tag: ${WERCKER_GIT_COMMIT}
        #tag: ${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
-       repository: fra.ocir.io/ptsbm02/getting-started-python
+       repository: fra.ocir.io/ptsbm02/sample-app
        registry: https://fra.ocir.io/v2
        working-dir: /pipeline/source
        ports: "5000"
@@ -86,3 +86,11 @@ deploy-to-stage:
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
         command: apply -f kubernetes.yml --namespace=stage
+ 
+ UA-test:
+    steps:
+     -script:
+        name: "Get Frontend Public IP"
+        code: |
+        export FRONTEND_SERVICE_IP=$(kubectl get -o jsonpath="{.status.loadBalancer.ingress[0].ip}"  --namespace=default service hello-world)
+        curl http://$FRONTEND_SERVICE_IP/version
