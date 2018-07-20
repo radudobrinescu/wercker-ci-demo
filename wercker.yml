@@ -86,8 +86,7 @@ deploy-to-stage:
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
         command: apply -f kubernetes.yml --namespace=stage
- 
- UA-test:
+ ua-test:
     steps:
      -script:
         name: "Get Frontend Public IP"
