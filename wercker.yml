@@ -43,7 +43,7 @@ push-release:
        password: $OCIRPASSWORD
        tag: ${WERCKER_GIT_COMMIT}
        #tag: ${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
-       repository: fra.ocir.io/ptsbm02/sample-app
+       repository: fra.ocir.io/ptsbm02/
        registry: https://fra.ocir.io/v2
        working-dir: /pipeline/source
        ports: "5000"
