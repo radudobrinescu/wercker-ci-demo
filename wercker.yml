@@ -41,9 +41,9 @@ push-release:
        image-name: sample-app
        username: $OCIRUSERNAME
        password: $OCIRPASSWORD
-       tag: ${WERCKER_GIT_COMMIT}
+       tag: latest
        #tag: ${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
-       repository: fra.ocir.io/ptsbm02/
+       repository: fra.ocir.io/ptsbm02/sample-app
        registry: https://fra.ocir.io/v2
        working-dir: /pipeline/source
        ports: "5000"
