@@ -32,13 +32,13 @@ docker-build:
   steps:
     - internal/docker-build:
       dockerfile: Dockerfile 
-      image-name: sample-app
+      image-name: cities-demo
  
 #Push release definition
 push-release:
   steps:
     - internal/docker-push:
-       image-name: sample-app
+       image-name: cities-demo
        username: $OCIRUSERNAME
        password: $OCIRPASSWORD
        tag: latest
