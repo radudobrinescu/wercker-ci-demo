@@ -35,8 +35,8 @@ docker-build:
       image-name: cities-demo
  
 #Push release definition
-push-release:
-  steps:
+#push-release:
+ # steps:
     - internal/docker-push:
        image-name: cities-demo
        username: $OCIRUSERNAME
