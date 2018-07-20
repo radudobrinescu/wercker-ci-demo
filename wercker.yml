@@ -46,9 +46,6 @@ push-release:
        repository: fra.ocir.io/ptsbm02/devops
        registry: https://fra.ocir.io/v2
        #working-dir: /pipeline/source
-       #ports: "5000"
-       #cmd: 'python app.py'
-       #cmd: 'sleep infinity'
        
 inject-secret:
     box:
