@@ -82,5 +82,6 @@ deploy-to-stage:
         server: $KUBERNETES_MASTER
         #username: $KUBERNETES_USERNAME
         token: $KUBERNETES_TOKEN
+        namespace: stage
         insecure-skip-tls-verify: true
-        command: apply -f kubernetes.yml --namespace=stage
+        command: apply -f kubernetes.yml
