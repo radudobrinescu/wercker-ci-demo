@@ -87,11 +87,3 @@ deploy-to-stage:
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
         command: apply -f kubernetes.yml --namespace=stage
- 
-     -script:
-         name: "Get Frontend Public IP"
-         code: |
-          export FRONTEND_SERVICE_IP=$(kubectl get -o jsonpath="{.status.loadBalancer.ingress[0].ip}"  --namespace=default service hello-world)
-          curl http://$FRONTEND_SERVICE_IP/version
-
-        
