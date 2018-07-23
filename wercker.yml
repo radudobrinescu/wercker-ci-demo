@@ -67,7 +67,7 @@ inject-secret:
 
 deploy-to-stage:
     box:
-        id: alpine
+        id: frolvlad/alpine-python3
         cmd: /bin/sh
     steps:
 
@@ -90,7 +90,6 @@ deploy-to-stage:
         code: |
           export FRONTEND_SERVICE_IP=$(kubectl get -o jsonpath="{.status.loadBalancer.ingress[0].ip}"  --namespace=stage service sample-app-backend-svc)
           echo $FRONTEND_SERVICE_IP
-          apt-get install -y python3-pip python3-dev
     after-steps:
         - mies/email-notify:
             from: wercker@devopsdemo.com
