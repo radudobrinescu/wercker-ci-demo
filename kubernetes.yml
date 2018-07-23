@@ -22,10 +22,10 @@ spec:
         ports:
           containerPort: 5000
           protocol: TCP
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 5000
+        #readinessProbe:
+          #httpGet:
+            #path: /
+            #port: 5000
         imagePullSecrets:
           - name: ptsbm02
 #strategy:
