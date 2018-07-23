@@ -23,10 +23,10 @@ spec:
           containerPort: 5000
           protocol: TCP
           #command: ['sh','-c','pyton app.py; sleep infinity']
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 5000
+        #readinessProbe:
+          #httpGet:
+            #path: /
+            #port: 5000
        imagePullSecrets:
          - name: ptsbm02
 #strategy:
