@@ -22,10 +22,6 @@ spec:
         ports:
          - name: sample-app
            containerPort: 5000
-        readinessProbe:
-          httpGet:
-            path: /
-            port: 5000
       imagePullSecrets:
           - name: ptsbm02
 #strategy:
