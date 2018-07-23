@@ -20,9 +20,7 @@ spec:
         image: fra.ocir.io/ptsbm02/devops:${WERCKER_GIT_COMMIT}
         imagePullPolicy: Always
         ports:
-        - name: sample-app
           containerPort: 5000
-          protocol: TCP
         readinessProbe:
           httpGet:
             path: /
