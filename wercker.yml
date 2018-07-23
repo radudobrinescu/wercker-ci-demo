@@ -41,7 +41,7 @@ docker-build:
        image-name: cities-demo
        username: $OCIRUSERNAME
        password: $OCIRPASSWORD
-       tag: ${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
+       tag: v1
        #tag: ${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
        repository: fra.ocir.io/ptsbm02/devops
        registry: https://fra.ocir.io/v2
