@@ -1,6 +1,6 @@
 box:
-  #id: python:2.7-slim
-  id: cbankieratypon/python-2.7-flask
+  id: python:2.7-slim
+  #id: cbankieratypon/python-2.7-flask
   #id: jazzdd/alpine-flask:latest
   #id: ubuntu:18.04
   ports:
@@ -91,9 +91,9 @@ deploy-to-stage:
           export FRONTEND_SERVICE_IP=$(kubectl get -o jsonpath="{.status.loadBalancer.ingress[0].ip}"  --namespace=stage service sample-app-backend-svc)
           echo $FRONTEND_SERVICE_IP
     after-steps:
-        - mies/email-notify:
-            from: wercker@devopsdemo.com
-            to: radu.dobrinescu@oracle.com
-            username: $SMTPUSER
-            password: $SMTPPASS
-            host: $SMTPSERVER
+    - wercker/email-notify@2.0.1:
+        from: wercker@devopsdemo.com
+        to: radu.dobrinescu@oracle.com
+        username: $SMTPUSER
+        password: $SMTPPASS
+        host: $SMTPSERVER
