@@ -40,7 +40,7 @@ docker-build:
     - script: 
         name: Test the container
         code: |
-            if curlOutput=`curl -s TestContainer:5000`; then 
+            if curlOutput='curl -s TestContainer:5000'; then 
                 if [ "$curlOutput" == "Hello World!" ]; then
                     echo "Test passed: container gave expected response"
                 else
