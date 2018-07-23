@@ -67,7 +67,7 @@ inject-secret:
 
 deploy-to-stage:
     box:
-        id: frolvlad/alpine-python3
+        id: jfloff/alpine-python
         cmd: /bin/sh
     steps:
 
