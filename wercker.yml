@@ -97,3 +97,6 @@ deploy-to-stage:
         username: $SMTPUSER
         password: $SMTPPASS
         host: $SMTPSERVER
+        branch: master
+        passed-body: Passed body
+        failed-body: Failed body
