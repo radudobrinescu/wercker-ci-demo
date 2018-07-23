@@ -67,7 +67,7 @@ inject-secret:
 
 deploy-to-stage:
     box:
-        id: alpine
+        id: python:2.7-slim
         cmd: /bin/sh
     steps:
 
@@ -87,7 +87,9 @@ deploy-to-stage:
         command: apply -f kubernetes.yml --namespace=stage
     - script:
         name: "Get Load Balancer config"
-        code: export FRONTEND_SERVICE_IP=$(kubectl get -o jsonpath="{.status.loadBalancer.ingress[0].ip}"  --namespace=stage service sample-app-backend-svc)
+        code: |
+          export FRONTEND_SERVICE_IP=$(kubectl get -o jsonpath="{.status.loadBalancer.ingress[0].ip}"  --namespace=stage service sample-app-backend-svc)
+          echo $FRONTEND_SERVICE_IP
     after-steps:
         - mies/email-notify:
             from: wercker@devopsdemo.com
