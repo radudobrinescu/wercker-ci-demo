@@ -1,8 +1,8 @@
 box:
   #id: python:2.7-slim
-  #id: cbankieratypon/python-2.7-flask
+  id: cbankieratypon/python-2.7-flask
   #id: jazzdd/alpine-flask:latest
-  id: ubuntu:18.04
+  #id: ubuntu:18.04
   ports:
     - "5000"
 
