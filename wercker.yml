@@ -82,6 +82,16 @@ deploy-to-stage:
         server: $KUBERNETES_MASTER
         #username: $KUBERNETES_USERNAME
         token: $KUBERNETES_TOKEN
-        namespace: stage
+        #namespace: stage
         insecure-skip-tls-verify: true
-        command: apply -f kubernetes.yml
+        command: apply -f kubernetes.yml --namespace=stage
+    - script:
+        name: "Get Load Balancer config"
+        code: export FRONTEND_SERVICE_IP=$(kubectl get -o jsonpath="{.status.loadBalancer.ingress[0].ip}"  --namespace=stage service sample-app-backend-svc)
+    after-steps:
+        - mies/email-notify:
+            from: wercker@devopsdemo.com
+            to: radu.dobrinescu@oracle.com
+            username: $SMTPUSER
+            password: $SMTPPASS
+            host: $SMTPSERVER
