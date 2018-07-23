@@ -67,7 +67,7 @@ inject-secret:
 
 deploy-to-stage:
     box:
-        id: python:2.7-slim
+        id: frol/docker-alpine-python2
         cmd: /bin/sh
     steps:
 
