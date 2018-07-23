@@ -67,7 +67,7 @@ inject-secret:
 
 deploy-to-stage:
     box:
-        id: python:2.7
+        id: alpine
         cmd: /bin/sh
     steps:
 
