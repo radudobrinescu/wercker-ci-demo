@@ -27,6 +27,8 @@ spec:
            httpGet:
               path: /
               port: 5000
+              initialDelaySeconds: 10
+              timeoutSeconds: 10
       imagePullSecrets:
           - name: ptsbm02
       
