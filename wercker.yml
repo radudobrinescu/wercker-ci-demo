@@ -12,7 +12,7 @@ box:
 #    - internal/watch:
 #        code: python app.py
 #        reload: true
-        
+
 # Build definition
 build:
   # The steps that will be executed on build
@@ -26,13 +26,13 @@ build:
         code: |
           python app_test.py
           echo "python version $(python --version) running"
-          echo "pip version $(pip --version) running" 
+          echo "pip version $(pip --version) running"
 
 #Build docker and test docker container. Push to OCIR if test is passed
 docker-build:
   steps:
     - internal/docker-build:
-      dockerfile: Dockerfile 
+      dockerfile: Dockerfile
       image-name: cities-demo
     - internal/docker-push:
        image-name: cities-demo
@@ -42,12 +42,12 @@ docker-build:
        #tag: ${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
        repository: fra.ocir.io/ptsbm02/devops
        registry: https://fra.ocir.io/v2
-       #working-dir: /pipeline/source  
+       #working-dir: /pipeline/source
 inject-secret:
     box:
         id: alpine
         cmd: /bin/sh
-    steps:    
+    steps:
     - kubectl:
         name: delete secret
         server: $KUBERNETES_MASTER
@@ -59,7 +59,7 @@ inject-secret:
         server: $KUBERNETES_MASTER
         token: $KUBERNETES_TOKEN
         insecure-skip-tls-verify: true
-        command: create secret docker-registry ptsbm02 --docker-server=$DOCKER_REGISTRY --docker-username=$OCIRUSERNAME --docker-password=$OCIRPASSWORD --docker-email=$DOCKER_EMAIL; echo create registry secret       
+        command: create secret docker-registry ptsbm02 --docker-server=$DOCKER_REGISTRY --docker-username=$OCIRUSERNAME --docker-password=$OCIRPASSWORD --docker-email=$DOCKER_EMAIL; echo create registry secret
 
 deploy-to-oke:
     box:
@@ -72,9 +72,9 @@ deploy-to-oke:
     - script:
         name: "Visualise Kubernetes config"
         code: cat kubernetes.yml
-           
+
     - kubectl:
-        name: deploy to stage
+        name: Deploy
         server: $KUBERNETES_MASTER
         #username: $KUBERNETES_USERNAME
         token: $KUBERNETES_TOKEN
