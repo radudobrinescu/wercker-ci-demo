@@ -80,9 +80,9 @@ deploy-to-oke:
         token: $KUBERNETES_TOKEN
         #namespace: stage
         insecure-skip-tls-verify: true
-        command: apply -f kubernetes.yml
+        #command: apply -f kubernetes.yml
         #command: set image deployment/sample-app-backend sample-app=fra.ocir.io/ptsbm02/devops:v2
-        #command: set image deployment/sample-app-backend sample-app=fra.ocir.io/devops:ptsbm02/${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
+        command: set image deployment/sample-app-backend sample-app=fra.ocir.io/ptsbm02/devops:${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
     #- script:
     #    name: "Get Load Balancer configuration"
     #    code: |
