@@ -38,8 +38,8 @@ docker-build:
        image-name: cities-demo
        username: $OCIRUSERNAME
        password: $OCIRPASSWORD
-       tag: v2
-       #tag: ${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
+       #tag: v2
+       tag: ${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
        repository: fra.ocir.io/ptsbm02/devops
        registry: https://fra.ocir.io/v2
        #working-dir: /pipeline/sources
@@ -81,7 +81,8 @@ deploy-to-oke:
         #namespace: stage
         insecure-skip-tls-verify: true
         #command: apply -f kubernetes.yml
-        command: set image deployment/sample-app-backend sample-app=fra.ocir.io/ptsbm02/devops:v2
+        #command: set image deployment/sample-app-backend sample-app=fra.ocir.io/ptsbm02/devops:v2
+        command: set image deployment/sample-app-backend sample-app=fra.ocir.io/ptsbm02/${WERCKER_GIT_BRANCH}-${WERCKER_GIT_COMMIT}
     #- script:
     #    name: "Get Load Balancer configuration"
     #    code: |
