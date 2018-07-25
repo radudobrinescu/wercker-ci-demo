@@ -11,7 +11,7 @@ def index():
 
 @app.route("/version")
 def version():
-    return "helloworld 2.1.0\n"
+    return "helloworld 1.0.0\n"
 
 @app.route('/cities.json')
 def cities():
